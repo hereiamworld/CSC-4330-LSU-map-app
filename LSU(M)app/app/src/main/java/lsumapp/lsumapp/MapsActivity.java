@@ -26,7 +26,7 @@ import java.util.Locale;
 /*
 /* DESCRIPTION: main program file
 /*
-/*   DATE     	       BY                     DESCRIPTION
+/*   DATE     	       BY                 DESCRIPTION
 /* ======== 	================	=======================
 /*  4/15/17 	 Kyle Eastin		created the file
 /*  4/19/17	     Alexandre Knijn	added pin creation on mouse long click
@@ -70,8 +70,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker at LSU Memorial Tower and move the camera
         LatLng startup = new LatLng(30.414498,-91.178913);
-        mMap.addMarker(new MarkerOptions().position(startup).title("War Memorial Tower"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startup,16));
+        mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.startup,16));
+
+        MapRes.displayBuildingMarkers(mMap);
 
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
