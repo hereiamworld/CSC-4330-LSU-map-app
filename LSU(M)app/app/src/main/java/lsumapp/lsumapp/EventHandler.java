@@ -17,7 +17,7 @@ import java.util.Calendar;
 /*   DATE     	       BY                  DESCRIPTION
 /* ======== 	================	=======================
 /*  4/23/17 	Alexandre Knijn		  created the file
-/*  4/25/17     Alexandre Knijn
+/*  4/25/17     Alexandre Knijn       built event array added event pins
 /*
 /*
 /*
@@ -41,10 +41,10 @@ class Event{
 }
 
 public class EventHandler {
-    static long[] startTimeArray = new long[] {1493165290000L};
-    static long[] endTimeArray = new long[]   {1493165300000L};
-    static String[] eventNameArray = new String[]{"https://www.facebook.com/"};
-    static double[] eventLatArray = new double[]{30.413885};
+    static long[] startTimeArray = new long[] {1493190000000L};
+    static long[] endTimeArray = new long[]   {1493200800000L};
+    static String[] eventNameArray = new String[]{"Pancake Breakfast-https://www.facebook.com/LSUadmissions/posts/421535464525532"};
+    static double[] eventLatArray = new double[]{30.403885};
     static double[] eventLngArray = new double[]{-91.179590};
     static Event[] eventArray = new Event[startTimeArray.length];
     static Marker[] eventMarkerArray = new Marker[startTimeArray.length];
@@ -64,7 +64,7 @@ public class EventHandler {
             if(currentTime>eventArray[i].startTime && currentTime <eventArray[i].endTime && eventMarkerArray[i] == null) {
                 LatLng eventLatLng = new LatLng(eventArray[i].latLocation,eventArray[i].lngLocation);
                 Marker m = mMap.addMarker(new MarkerOptions().position(eventLatLng).title(eventArray[i].eventName)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).snippet("test"));
                 eventMarkerArray[i] = m;
 
             }

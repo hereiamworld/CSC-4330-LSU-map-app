@@ -1,13 +1,21 @@
 package lsumapp.lsumapp;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,6 +47,10 @@ import java.util.TimerTask;
 /* ======== 	================	=======================
 /*  4/15/17 	 Kyle Eastin		created the file
 /*  4/19/17	     Alexandre Knijn	added pin creation on mouse long click
+/*  4/25/17      Kyle Eastin        Zoom and Boundary restrictions
+/*  4/25/17      Aaron Mouledous    clickEvents and currentLocation
+/*  4/25/17      Alexandre Knijn    locationPermissions and event handeler
+/*
 /*
 /*
 /*
@@ -108,8 +120,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         MapRes.displayBuildingMarkers(mMap);
 
-        LatLngBounds LSU = new LatLngBounds(new LatLng(30.403478,-91.188744),new LatLng(30.420567,-91.167911));
-
+        LatLngBounds LSU = new LatLngBounds(new LatLng(30.385517,-91.182799),new LatLng(30.420567,-91.167911));
+//30.403478,-91.188744
         mMap.setLatLngBoundsForCameraTarget(LSU);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(LSU,0));
         //mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
@@ -181,5 +193,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED )
+        {
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.INTERNET
+            }, 10);
+            return;
+        }
+        else
+        {
+            mMap.setMyLocationEnabled(true);
+        }
+
+
+
+    }
+
+    /**
+     * This function is called when the program asks for permission
+     *
+     * @return void
+     * @param requestCode: code of the request
+     * @param permissions: all the permisions being asked for
+     * @param grantResults: grants results
+     * @throws null
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 10) {
+            if (permissions.length == 1 &&
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+            } else {
+                // Permission was denied. Display an error message.
+            }
+        }
+    }
+
+    /**
+     * This function is called when the program asks for permission
+     *
+     * @return void
+     * @param currentView: currentView of the scene
+     * @throws null
+     */
+    public void showPopup(View currentView) {
+        PopupMenu popup = new PopupMenu(this, currentView);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.popmenu, popup.getMenu());
+        popup.show();
     }
 }
