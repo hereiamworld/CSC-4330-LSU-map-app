@@ -28,7 +28,7 @@ public class MapRes {
 
     public static LatLng startup=new LatLng(30.4076239, -91.1796833);
     public static String name="Patrick F. Taylor";
-    private static LatLng[] latLngBuildings=new LatLng[] {new LatLng(30.414498,-91.178913), new LatLng(30.414474,-91.180403),new LatLng(30.412872, -91.177045),
+    private static LatLng[] latLngBuildings=new LatLng[] {new LatLng(30.414498,-91.178913),new LatLng(30.414474,-91.180403),new LatLng(30.412872, -91.177045),
             new LatLng(30.413885,-91.179590),new LatLng(30.413203,-91.178970),
             new LatLng(30.413811,-91.180548),new LatLng(30.413567,-91.180698),new LatLng(30.412951,-91.180477),
             new LatLng(30.412706,-91.180716),new LatLng(30.412387,-91.180700),new LatLng(30.412167,-91.179966),
@@ -42,8 +42,12 @@ public class MapRes {
             "Murphy J. Foster Hall","George Peabody Hall","Samuel L. Lockett Hall","Tiger Stadium","Howe-Russel Geoscience Complex",
             "Engineering Shops Bldg","DMAE Digital Media Center","Design Bldg", "Patrick F. Taylor"};
 
-    private static LatLng[] latLngFood = new LatLng[] {};
-    private static String[] namesFood = new String[] {};
+    private static LatLng[] latLngFood = new LatLng[] {new LatLng(30.4126572,-91.1771705),new LatLng(30.410366,-91.174250),new LatLng(30.414569,-91.180105),
+            new LatLng(30.415296,-91.179815),new LatLng(30.417133,-91.181793),new LatLng(30.418000,-91.179152),
+            new LatLng(30.418029,-91.176389),new LatLng(30.417314,-91.176268),new LatLng(30.417397,-91.177246),
+            new LatLng(30.412737,-91.1754807),new LatLng(30.417377,-91.176831)};
+    private static String[] namesFood = new String[] {"McDonald's","459 Commons","CC's Coffee House","Subway","The 5","Louie's Cafe",
+            "Raising Cane's Chicken Fingers","The Chimes","Insomnia Cookies","Starbuck's","Highland Coffees"};
 
     private static LatLng[] latLngParking = new LatLng[] {};
     private static String[] namesParking = new String[] {};
@@ -73,7 +77,7 @@ public class MapRes {
     {
         for(int i=0;i<latLngBuildings.length;i++)
         {
-            Marker m =  mMap.addMarker(new MarkerOptions().position(latLngBuildings[i]).title(namesBuildings[i]));
+            Marker m = mMap.addMarker(new MarkerOptions().position(latLngBuildings[i]).title(namesBuildings[i]));
             buildingMarkerList.add(m);
         }
     }
@@ -83,7 +87,7 @@ public class MapRes {
         for(int i=0;i<latLngFood.length;i++)
         {
             Marker m = mMap.addMarker(new MarkerOptions().position(latLngFood[i]).title(namesFood[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
             foodMarkerList.add(m);
         }
     }

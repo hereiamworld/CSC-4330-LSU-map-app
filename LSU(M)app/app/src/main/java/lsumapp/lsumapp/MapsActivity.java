@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -47,6 +48,7 @@ import java.util.TimerTask;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
     Geocoder geocoder;
     Marker marker;
 
@@ -75,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+<<<<<<< HEAD
         EventHandler.setup();
 
         final Handler handler = new Handler();
@@ -100,14 +103,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+=======
+        mMap.setMinZoomPreference(15.0f);
+        mMap.setMaxZoomPreference(20.0f);
+>>>>>>> origin/master
         // Add a marker at LSU Memorial Tower and move the camera
         LatLng startup = new LatLng(30.414498,-91.178913);
-        mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.startup,16));
 
+<<<<<<< HEAD
         //MapRes.displayBuildingMarkers(mMap);
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+=======
+        LatLngBounds LSU = new LatLngBounds(new LatLng(30.403478,-91.188744),new LatLng(30.420567,-91.167911));
+
+        mMap.setLatLngBoundsForCameraTarget(LSU);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(LSU,0));
+        //mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.startup,15));
+>>>>>>> origin/master
 
             @Override
             public void onInfoWindowClick(Marker arg0){
@@ -120,6 +134,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+
+
+        MapRes.displayBuildingMarkers(mMap);
+        MapRes.displayFoodMarkers(mMap);
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             /**
