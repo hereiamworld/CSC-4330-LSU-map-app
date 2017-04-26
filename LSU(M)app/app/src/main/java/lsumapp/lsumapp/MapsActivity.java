@@ -1,9 +1,13 @@
 package lsumapp.lsumapp;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,10 +19,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /****************************************************************************************/
 /*
@@ -67,14 +75,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        EventHandler.setup();
+
+        final Handler handler = new Handler();
+
+        /**
+         * This function is called every 10 seconds by a handler so that events can be checked for
+         *
+         * @return void
+         * @param point:
+         * @throws null
+         */
+        Runnable checkEvent = new Runnable() {
+            @Override
+            public void run() {
+
+                EventHandler.checkEvents(Calendar.getInstance().getTimeInMillis(),mMap);
+
+                handler.postDelayed(this, 1000);
+            }
+        };
+
+        handler.postDelayed(checkEvent, 1000);
+
+
 
         // Add a marker at LSU Memorial Tower and move the camera
         LatLng startup = new LatLng(30.414498,-91.178913);
         mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.startup,16));
 
-        MapRes.displayBuildingMarkers(mMap);
+        //MapRes.displayBuildingMarkers(mMap);
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker arg0){
+                String[] separateMarkerTitle = arg0.getTitle().split("-",2);
+                if(separateMarkerTitle.length>1)
+                {
+                    Uri uri = Uri.parse(separateMarkerTitle[1]);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            }
+        });
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             /**
