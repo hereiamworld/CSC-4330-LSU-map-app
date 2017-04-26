@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -50,8 +53,7 @@ import java.util.TimerTask;
 /*  4/25/17      Kyle Eastin        Zoom and Boundary restrictions
 /*  4/25/17      Aaron Mouledous    clickEvents and currentLocation
 /*  4/25/17      Alexandre Knijn    locationPermissions and event handeler
-/*
-/*
+/*  4/25/17      Kyle Eastin        added onMapSearch function
 /*
 /*
 /****************************************************************************************/
@@ -150,6 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         MapRes.displayBuildingMarkers(mMap);
         MapRes.displayFoodMarkers(mMap);
+        MapRes.displayParkingMarkers(mMap);
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             /**
@@ -245,4 +248,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         inflater.inflate(R.menu.popmenu, popup.getMenu());
         popup.show();
     }
+
+    public void onMapSearch(View view)
+    {
+        EditText locationSearch = (EditText)findViewById(R.id.editText);
+        String location = locationSearch.getText().toString();
+
+        for(int i=0;i<MapRes.namesBuildings.length;i++)
+        {
+            if(location.compareTo(MapRes.namesBuildings[i])==0)
+            {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.latLngBuildings[i],15));
+                break;
+            }
+        }
+        locationSearch = null;
+
+    }
+
 }
