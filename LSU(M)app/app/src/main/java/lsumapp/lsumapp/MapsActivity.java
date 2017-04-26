@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-<<<<<<< HEAD
+
         EventHandler.setup();
 
         final Handler handler = new Handler();
@@ -101,29 +101,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         handler.postDelayed(checkEvent, 1000);
 
-
-
-=======
         mMap.setMinZoomPreference(15.0f);
         mMap.setMaxZoomPreference(20.0f);
->>>>>>> origin/master
         // Add a marker at LSU Memorial Tower and move the camera
         LatLng startup = new LatLng(30.414498,-91.178913);
 
-<<<<<<< HEAD
-        //MapRes.displayBuildingMarkers(mMap);
+        MapRes.displayBuildingMarkers(mMap);
 
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-=======
         LatLngBounds LSU = new LatLngBounds(new LatLng(30.403478,-91.188744),new LatLng(30.420567,-91.167911));
 
         mMap.setLatLngBoundsForCameraTarget(LSU);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(LSU,0));
         //mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapRes.startup,15));
->>>>>>> origin/master
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
+            /**
+             * This function is called when a marker title is clicked
+             *
+             * @return void
+             * @param point: marker of title that is clicked
+             * @throws null
+             */
             public void onInfoWindowClick(Marker arg0){
                 String[] separateMarkerTitle = arg0.getTitle().split("-",2);
                 if(separateMarkerTitle.length>1)
