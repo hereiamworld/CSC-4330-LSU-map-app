@@ -44,8 +44,8 @@ public class EventHandler {
     static long[] startTimeArray = new long[] {1493190000000L};
     static long[] endTimeArray = new long[]   {1493200800000L};
     static String[] eventNameArray = new String[]{"Pancake Breakfast-https://www.facebook.com/LSUadmissions/posts/421535464525532"};
-    static double[] eventLatArray = new double[]{30.403885};
-    static double[] eventLngArray = new double[]{-91.179590};
+    static double[] eventLatArray = new double[]{30.412844};
+    static double[] eventLngArray = new double[]{-91.177847};
     static Event[] eventArray = new Event[startTimeArray.length];
     static Marker[] eventMarkerArray = new Marker[startTimeArray.length];
 

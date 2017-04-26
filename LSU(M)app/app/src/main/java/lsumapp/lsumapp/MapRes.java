@@ -19,15 +19,18 @@ import java.util.List;
 /* ======== 	================	=======================
 /*  4/21/17 	  Kyle Eastin		  created the file
 /*  4/25/17       Kyle Eastin         added food locations
-/*
+/*  4/25/17       Kyle Eastin         added parking location examples
 /*
 /*
 /****************************************************************************************/
 
 public class MapRes {
 
+    //startup location
     public static LatLng startup=new LatLng(30.4076239, -91.1796833);
     public static String name="Patrick F. Taylor";
+
+    //building names and coordinates
     public static LatLng[] latLngBuildings=new LatLng[] {new LatLng(30.414498,-91.178913),new LatLng(30.414474,-91.180403),new LatLng(30.412872, -91.177045),
             new LatLng(30.413885,-91.179590),new LatLng(30.413203,-91.178970),
             new LatLng(30.413811,-91.180548),new LatLng(30.413567,-91.180698),new LatLng(30.412951,-91.180477),
@@ -42,6 +45,7 @@ public class MapRes {
             "Murphy J. Foster Hall","George Peabody Hall","Samuel L. Lockett Hall","Tiger Stadium","Howe-Russel Geoscience Complex",
             "Engineering Shops Bldg","DMAE Digital Media Center","Design Bldg", "Patrick F. Taylor"};
 
+    //food names and coordinates
     private static LatLng[] latLngFood = new LatLng[] {new LatLng(30.4126572,-91.1771705),new LatLng(30.410366,-91.174250),new LatLng(30.414569,-91.180105),
             new LatLng(30.415296,-91.179815),new LatLng(30.417133,-91.181793),new LatLng(30.418000,-91.179152),
             new LatLng(30.418029,-91.176389),new LatLng(30.417314,-91.176268),new LatLng(30.417397,-91.177246),
@@ -49,32 +53,20 @@ public class MapRes {
     private static String[] namesFood = new String[] {"McDonald's","459 Commons","CC's Coffee House","Subway","The 5","Louie's Cafe",
             "Raising Cane's Chicken Fingers","The Chimes","Insomnia Cookies","Starbuck's","Highland Coffees"};
 
+    //parking names and coordinates
     private static LatLng[] latLngParking = new LatLng[] {new LatLng(30.405065,-91.177035), new LatLng(30.408204,-91.175234)};
     private static String[] namesParking = new String[] {"Nicholson Extension East Lot","AG Coliseum Lot"};
 
+    //lists of pins dropped
     private static List<Marker> buildingMarkerList = new ArrayList<Marker>();
     private static List<Marker> foodMarkerList = new ArrayList<Marker>();
     private static List<Marker> parkingMarkerList = new ArrayList<Marker>();
 
-
-
-
-    public static void set(String newName)
-    {
-        int i;
-        int x=-1;
-        for(i = 0;i<namesBuildings.length;i++)
-        {
-            if(newName.equals(namesBuildings[i]))
-                x = i;
-        }
-        if(x!=-1)
-        {
-            name=namesBuildings[x];
-            startup=latLngBuildings[x];
-        }
-    }
-
+    /**
+     * Displays a pin for each building name-building coordinate pair
+     * @param mMap - the Map
+     * @return void
+     */
     public static void displayBuildingMarkers(GoogleMap mMap)
     {
         for(int i=0;i<latLngBuildings.length;i++)
@@ -84,6 +76,11 @@ public class MapRes {
         }
     }
 
+    /**
+     * Displays a pin for each food name-food coordinate pair
+     * @param mMap - the Map
+     * @return void
+     */
     public static void displayFoodMarkers(GoogleMap mMap)
     {
         for(int i=0;i<latLngFood.length;i++)
@@ -94,12 +91,17 @@ public class MapRes {
         }
     }
 
+    /**
+     * Displays a pin for each building name-building coordinate pair
+     * @param mMap - the Map
+     * @return void
+     */
     public static void displayParkingMarkers(GoogleMap mMap)
     {
         for(int i=0;i<latLngParking.length;i++)
         {
             Marker m = mMap.addMarker(new MarkerOptions().position(latLngParking[i]).title(namesParking[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("Mostly Full"));
             parkingMarkerList.add(m);
         }
     }
