@@ -127,15 +127,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMinZoomPreference(15.0f);
         mMap.setMaxZoomPreference(20.0f);
 
-<<<<<<< HEAD
         MapRes.displayBuildingMarkers(mMap);
-
-        LatLngBounds LSU = new LatLngBounds(new LatLng(30.385517,-91.182799),new LatLng(30.420567,-91.167911));
-
-=======
+        
         //set a restriction on
         LatLngBounds LSU = new LatLngBounds(new LatLng(30.403478,-91.188744),new LatLng(30.420567,-91.167911));
->>>>>>> origin/master
         mMap.setLatLngBoundsForCameraTarget(LSU);
 
         //center the camera on the startup point

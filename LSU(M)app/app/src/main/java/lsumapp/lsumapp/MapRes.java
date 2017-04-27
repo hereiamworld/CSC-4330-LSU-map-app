@@ -122,12 +122,7 @@ public class MapRes {
     {
         for(int i=0;i<latLngParking.length;i++)
         {
-<<<<<<< HEAD
             Marker m = mMap.addMarker(new MarkerOptions().position(latLngParking[i]).title(namesParking[i]).icon(BitmapDescriptorFactory.fromResource(R.drawable.parking)));
-=======
-            Marker m = mMap.addMarker(new MarkerOptions().position(latLngParking[i]).title(namesParking[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("Mostly Full"));
->>>>>>> origin/master
             parkingMarkerList.add(m);
         }
     }
