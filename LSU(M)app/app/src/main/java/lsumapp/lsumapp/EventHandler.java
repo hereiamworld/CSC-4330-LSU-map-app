@@ -41,8 +41,8 @@ class Event{
 }
 
 public class EventHandler {
-    static long[] startTimeArray = new long[] {1493190000000L};
-    static long[] endTimeArray = new long[]   {1493200800000L};
+    static long[] startTimeArray = new long[] {1493268080000L};
+    static long[] endTimeArray = new long[]   {1493268090000L};
     static String[] eventNameArray = new String[]{"Pancake Breakfast-https://www.facebook.com/LSUadmissions/posts/421535464525532"};
     static double[] eventLatArray = new double[]{30.403885};
     static double[] eventLngArray = new double[]{-91.179590};
@@ -64,7 +64,7 @@ public class EventHandler {
             if(currentTime>eventArray[i].startTime && currentTime <eventArray[i].endTime && eventMarkerArray[i] == null) {
                 LatLng eventLatLng = new LatLng(eventArray[i].latLocation,eventArray[i].lngLocation);
                 Marker m = mMap.addMarker(new MarkerOptions().position(eventLatLng).title(eventArray[i].eventName)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).snippet("test"));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.event)));
                 eventMarkerArray[i] = m;
 
             }

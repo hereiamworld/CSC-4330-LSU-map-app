@@ -1,5 +1,7 @@
 package lsumapp.lsumapp;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -79,7 +81,7 @@ public class MapRes {
     {
         for(int i=0;i<latLngBuildings.length;i++)
         {
-            Marker m = mMap.addMarker(new MarkerOptions().position(latLngBuildings[i]).title(namesBuildings[i]));
+            Marker m = mMap.addMarker(new MarkerOptions().position(latLngBuildings[i]).title(namesBuildings[i]).icon(BitmapDescriptorFactory.fromResource(R.drawable.building)).snippet("Click for more information"));
             buildingMarkerList.add(m);
         }
     }
@@ -88,8 +90,7 @@ public class MapRes {
     {
         for(int i=0;i<latLngFood.length;i++)
         {
-            Marker m = mMap.addMarker(new MarkerOptions().position(latLngFood[i]).title(namesFood[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+            Marker m = mMap.addMarker(new MarkerOptions().position(latLngFood[i]).title(namesFood[i]).icon(BitmapDescriptorFactory.fromResource(R.drawable.food)));
             foodMarkerList.add(m);
         }
     }
@@ -98,8 +99,7 @@ public class MapRes {
     {
         for(int i=0;i<latLngParking.length;i++)
         {
-            Marker m = mMap.addMarker(new MarkerOptions().position(latLngParking[i]).title(namesParking[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+            Marker m = mMap.addMarker(new MarkerOptions().position(latLngParking[i]).title(namesParking[i]).icon(BitmapDescriptorFactory.fromResource(R.drawable.parking)));
             parkingMarkerList.add(m);
         }
     }

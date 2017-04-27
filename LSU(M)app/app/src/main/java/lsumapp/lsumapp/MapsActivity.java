@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ import java.util.TimerTask;
 /****************************************************************************************/
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -123,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MapRes.displayBuildingMarkers(mMap);
 
         LatLngBounds LSU = new LatLngBounds(new LatLng(30.385517,-91.182799),new LatLng(30.420567,-91.167911));
-//30.403478,-91.188744
+
         mMap.setLatLngBoundsForCameraTarget(LSU);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(LSU,0));
         //mMap.addMarker(new MarkerOptions().position(MapRes.startup).title(MapRes.name));
@@ -145,6 +146,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Uri uri = Uri.parse(separateMarkerTitle[1]);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
+                }
+                else
+                {
+                     Intent activityDetailsIntent = new Intent(MapsActivity.this,markerInfoClickActivity.class);
+                    startActivity(activityDetailsIntent);
                 }
             }
         });
