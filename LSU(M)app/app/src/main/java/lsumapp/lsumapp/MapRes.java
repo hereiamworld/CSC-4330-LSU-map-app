@@ -76,6 +76,16 @@ public class MapRes {
         }
     }
 
+    public static void removeBuildingMarkers(GoogleMap mMap)
+    {
+        for(int i=0;i<buildingMarkerList.size();i++) {
+            buildingMarkerList.get(i).remove();
+        }
+        for(int i=0;i<buildingMarkerList.size();i++) {
+            buildingMarkerList.remove(i);
+        }
+    }
+
     /**
      * Displays a pin for each food name-food coordinate pair
      * @param mMap - the Map
@@ -91,6 +101,17 @@ public class MapRes {
         }
     }
 
+    public static void removeFoodMarkers(GoogleMap mMap)
+    {
+        for(int i=0;i<foodMarkerList.size();i++) {
+            foodMarkerList.get(i).remove();
+        }
+        for(int i=0;i<foodMarkerList.size();i++) {
+            foodMarkerList.remove(i);
+        }
+
+    }
+
     /**
      * Displays a pin for each building name-building coordinate pair
      * @param mMap - the Map
@@ -104,5 +125,16 @@ public class MapRes {
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("Mostly Full"));
             parkingMarkerList.add(m);
         }
+    }
+
+    public static void removeParkingMarkers(GoogleMap mMap)
+    {
+        for(int i=0;i<parkingMarkerList.size();i++) {
+            parkingMarkerList.get(i).remove();
+        }
+        for(int i=0;i<parkingMarkerList.size();i++) {
+            parkingMarkerList.remove(i);
+        }
+
     }
 }

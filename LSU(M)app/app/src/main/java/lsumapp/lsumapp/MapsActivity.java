@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.PopupMenu;
 import android.view.View;
 import android.widget.EditText;
@@ -98,6 +99,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         EventHandler.setup();
         final Handler handler = new Handler();
+        CheckBox buildingCheckBox = (CheckBox) findViewById(R.id.checkBoxBuildings);
+        final CheckBox foodCheckBox = (CheckBox) findViewById(R.id.checkBoxFood);
+        final CheckBox parkingCheckBox = (CheckBox) findViewById(R.id.checkBoxParking);
 
         /**
          * This function is called every 10 seconds by a handler so that events can be checked for
@@ -151,9 +155,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //display pins on the Map
-        MapRes.displayBuildingMarkers(mMap);
-        MapRes.displayFoodMarkers(mMap);
-        MapRes.displayParkingMarkers(mMap);
+
+        if(buildingCheckBox.isChecked())
+            MapRes.displayBuildingMarkers(mMap);
+        if(foodCheckBox.isChecked())
+            MapRes.displayFoodMarkers(mMap);
+        if(parkingCheckBox.isChecked())
+            MapRes.displayParkingMarkers(mMap);
 
         /**
          * This function drops a custom pin down when a longClick occurs
@@ -274,6 +282,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         locationSearch = null;
+    }
+
+
+    public void onBuildingsClick(View view){
+        CheckBox buildingCheckBox = (CheckBox) findViewById(R.id.checkBoxBuildings);
+        if(buildingCheckBox.isChecked())
+            MapRes.displayBuildingMarkers(mMap);
+        else
+            MapRes.removeBuildingMarkers(mMap);
+    }
+
+    public void onFoodClick(View view){
+        CheckBox foodCheckBox = (CheckBox) findViewById(R.id.checkBoxFood);
+        if(foodCheckBox.isChecked())
+            MapRes.displayFoodMarkers(mMap);
+        else
+            MapRes.removeFoodMarkers(mMap);
+    }
+
+    public void onParkingClick(View view){
+        CheckBox parkingCheckBox = (CheckBox) findViewById(R.id.checkBoxParking);
+        if(parkingCheckBox.isChecked())
+            MapRes.displayParkingMarkers(mMap);
+        else
+            MapRes.removeParkingMarkers(mMap);
     }
 
 }
